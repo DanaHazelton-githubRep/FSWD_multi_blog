@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+
+     <ul>
+    <h2>Members of Partybarge Blog</h2>
+      {% for user in users %}
+      <li>{{user.name}}  -  email:{{user.email}}</li>
+      {% endfor %}
+
+{% endblock %}

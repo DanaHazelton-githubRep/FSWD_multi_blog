@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Edit Your Post</h2>
+    <form method="post">
+      <label>
+        <div>Subject</div>
+        <input class="entry-box " type="text" name="subject" value="{{post.subject}}">
+      </label>
+      <br>
+      <label>
+        <div>Blog Post</div>
+        <textarea class="comment-box" name="content">{{post.content}}</textarea>
+      </label>
+      <input type="hidden" name="post_id" value="{{post.key().id()}}">
+      <div class="error">{{error}}</div>
+      <input class="btn btn-primary" type="submit"> or <a class="btn btn-primary" href="/blog">Cancel</a>
+    </form>
+
+{% endblock %}

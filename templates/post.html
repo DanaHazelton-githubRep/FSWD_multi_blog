@@ -1,0 +1,34 @@
+<h2>Blog Post</h2>
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">
+        {% if permalink %}
+        Subject:<a href="/blog/{{post.key().id()}}">{{post.subject}}</a>
+        {% else %}
+          {{post.subject}}
+        {% endif %}
+    </h4>
+    <p class="card-text">
+      <span id="span01">Blog Post:</span> {{post._render_text | safe}}
+    </p>
+    <h6><span id="span01">Created:</span> {{post.created.strftime("%b %d, %Y")}} by {{ blogger.name }}</h6>
+      {% if user %}
+        {% if permalink %}
+        <a class="btn btn-primary" href="/blog/{{post.key().id()}}">Comment</a> -
+        {% endif %}
+        {% if user.key().id() == post.blogger_id %}
+        <a class="btn btn-primary" href="/blog/edit?post_id={{post.key().id()}}">Edit</a>
+        <a class="btn btn-primary" href="/blog/delete?post_id={{post.key().id()}}">Delete</a>
+        {% else %}
+          {% if user.key().id() not in post.liked %}
+          <a class="btn btn-primary" href="/blog/like?post_id={{post.key().id()}}&amp;permalink={{ not permalink }}">Like</a>
+          {% else %}
+          <a class="btn btn-primary" href="/blog/Unlike?post_id={{post.key().id()}}&amp;permalink={{ not permalink }}">Unlike</a>
+          {% endif %}
+        {% endif %}
+      {% endif %}
+      <br>
+      <span id="span01">#Likes: {{post.liked_count}}</span>
+  </div>
+</div>
+

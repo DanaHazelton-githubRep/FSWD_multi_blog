@@ -1,0 +1,121 @@
+html, body {
+    -webkit-font-smoothing: antialiased;
+}
+body {
+    color: #666;
+    margin: 0px;
+    line-height: 1.5em;
+    overflow-y: scroll;
+}
+textarea { 
+   min-height: 100%;
+}
+a,a:hover {
+    color:initial;
+    text-decoration:none;
+}
+.navbar {
+    border-radius:0px;
+}
+.album {
+    background: #eee;
+}
+img {
+    max-width:100%;
+}
+.card {
+    margin-right:2.5%;
+    margin-bottom:5%;
+    padding:0px;    
+    box-shadow: 0 2px 0 #D9E1E7;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.card.full {
+    margin: 0 auto;
+    margin-bottom:3%;
+    width:60%;
+}
+#deletePost {
+    float:left;
+}
+.comments {
+    margin-bottom:2%;
+}
+.card.full.right {
+    float:left;
+    width:27.5%;
+    margin-right:0%;
+}
+.card > img {
+    margin-bottom:0px;
+}
+.card p {
+    word-wrap: break-word;
+}
+.stats {
+    padding:0px;
+    margin:0px;
+}
+.stats.comments {
+    display: inline-block;
+}
+.stats li{
+    margin-right:10px;
+    list-style:none;
+    float:left;
+}
+.stats li i{
+    padding-right:5px;   
+}
+.stats li.right{
+    float:right;
+}
+.stats .date {
+    text-transform: uppercase;
+    font-size:12px;
+}
+.stats .date.comments {
+    text-transform: none;
+    font-size:12px;
+}
+.stats .date a {
+    color:#666;
+}
+.stats .date:hover a {
+    color:#222;
+}
+.like button {
+    padding: 0;
+    border: none;
+    background: none;
+}
+.like button:active {
+  color:initial;
+}
+.menu {
+    background-color:#435C74;
+    height:77px;
+}
+.menu ul li a {
+    color: rgba(255, 255, 255, .6)!important;
+    line-height: 44px;
+}
+.menu ul li a:hover {
+    color:#fff!important;  
+}
+.profile {
+    color: rgba(255, 255, 255, .5);
+}
+.profile a{
+    display: inline-block!important;
+}
+.login.form-inline {
+    line-height: 58px;
+}
+.card-title a {
+    color:#555;
+}
+.card-title a:hover {
+    color:#222;
+}

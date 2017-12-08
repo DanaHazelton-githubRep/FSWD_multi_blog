@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang= "en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300" rel="stylesheet">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Partybarge Blog</title>
+    <link rel="icon" href="../../favicon.ico">
+    <link type="text/css" rel="stylesheet" href="/static/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link href="../static/css/blog.css" rel="stylesheet">
+    <!-- <link href="../static/css/font-awesome.min.css" rel="stylesheet"> -->
+  </head>
+  <body class="mat">
+    <div class="container-fluid">
+      <nav class="row">
+        <header class="orange-mat col-md-12">
+          <div class="col-md-4">
+            <img class="title-logo" src="/static/profile_images/partybarge.GIF" alt="family_boating pic">
+          </div>
+          <div class="col-md-8" >
+            <h1>Partybarge Blog Page</h1>
+            <nav class="navbar navbar-default">
+              <div class="container nav-buttons">
+                <ul class="nav navbar-nav">
+                  <li class="nav-item"><a class="nav-link" href="/blog">Front Page</a>
+                  </li>
+                  {% if username %}
+                  <li class="nav-item"><a class="nav-link" href="/blog/newpost">Add a Post</a>
+                  </li>
+                  {% endif %}
+                  {% if not username %}
+                  <li class="nav-item"><a class="nav-link" href="/signup">Sign Up</a></li>
+                  {% endif %}
+                  {% if not username %}
+                  <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>{% endif %}
+                  <li class="nav-item"><a class="nav-link" href="/users">Users</a></li>
+                  {% if username %}
+                  <li class="profile nav-item float-xs-right">{{username}}&nbsp;&nbsp;<a class="nav-link " href="/logout"> <span class="btn btn-warning btn-sm">Logout</span></a></li>{% endif %}
+                </ul>
+              </div>
+            </nav>
+            <nav class="row">
+              <div class="col-md-3">
+                <div class="thumbnail">
+                  <a href="https://www.mercurymarine.com/en/us/">
+                    <img class="img-responsive img-thumbnail" src="/static/profile_images/merc_out.jpg" alt="Merc outboards" style="width:100%">
+                    <div class="caption">
+                      <p>Mercury Outboards</p>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="thumbnail">
+                  <a href="http://www.trackerboats.com/">
+                    <img class="img-responsive img-thumbnail" src="/static/profile_images/tracker_boats.jpg" alt="Tracker Boats" style="width:100%">
+                    <div class="caption">
+                      <p>Tracker Boats</p>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="thumbnail">
+                  <a href="http://www.magmaproducts.com/">
+                    <img class="img-responsive img-thumbnail" src="/static/profile_images/magma_grill.jpg" alt="Magma Grills" style="width:100%">
+                    <div class="caption">
+                      <p>Magma Grills</p>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="thumbnail">
+                  <a href="http://www.ncwildlife.org/Boating/Marina-Resources/Boating-Education-Courses/">
+                    <img class="img-responsive img-thumbnail" src="/static/profile_images/BoatingSafety.jpg" alt="NC Boating Safety" style="width:100%">
+                    <div class="caption">
+                      <p>NC Boating Safety</p>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </nav>
+          </div>
+        </header>
+      </nav>
+    </div>
+    <div class="container-fluid">
+      {% if not user %}
+      <nav class="row">
+        <div class="col-md-12 text-center orange-mat">
+          <div>
+            <h2>Welcome to Partybarge's Blog Page - We talk Pontoon boats 24/7!!!<br>
+            <a href="/signup" class="btn btn-warning" role="button">Sign Up</a> or <a href="/login" class="btn btn-warning" role="button">Login</a> and join the conversations</h2>
+          </div>
+        </div>
+      </nav>
+      {% endif %}
+      {% if user %}
+      <nav class="row">
+        <div class="col-md-12 text-center orange-mat">
+          <div>
+            <h2>Welcome {{username}} to Partybarge's Blog Page - We talk Pontoon boats 24/7!!! <a href="/blog/newpost" class="btn btn-warning" role="button">Add a Post</a> and Join the Conversations</h2>
+          </div>
+        </div>
+      </nav>
+      {% endif %}
+      </div>
+      <nav class="row">
+        <div class="container-fluid">
+          <div class="col-md-12 text-center orange-mat">
+            {% block content %}
+            {% endblock %}
+            <footer class="footer-fp"><a href="/blog">Back to Front Page</footer>
+          </div>
+        </div>
+        <br>
+  <footer>
+    <div class="container-fluid">
+      {% if user %}
+        <a class="orange-mat" href="/blog/newpost">Post on the BLOG</a>
+      {% else %}
+        <marquee behavior=alternate class="footer orange-mat">You must be registered and logged in to submit post. Thank You:)</marquee>
+      {% endif %}
+    </div>
+  </footer>
+</body>
+
+<!-- #JAVA SCRIPTS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="bootstrap/js/jquery.min.js"><\/script>')</script>
+<script src="../static/js/bootstrap.min.js"></script>
+</html>
+

@@ -1,0 +1,25 @@
+<div class="card">
+  <div class="card-body">
+    <div class="card-title">
+      Fellow blogger: {{ blogger.name }} has said:
+    </div>
+    <div class="card-text">
+      <p>{{comment._render_text | safe}}</p>
+        {% if user %}
+          {% if user.key().id() == comment.blogger_id %}
+            <a class="btn btn-primary" href="/blog/editcomment?comment_id={{comment.key().id()}}">Edit</a>
+            <a class="btn btn-primary" href="/blog/deletecomment?comment_id={{comment.key().id()}}">Delete</a>
+        {% else %}
+          {% if user.key().id() not in comment.liked %}
+            <a class="btn btn-primary" href="/blog/like?comment_id={{comment.key().id()}}&amp;permalink={{ not permalink }}">Like</a>
+          {% else %}
+            <a class="btn btn-primary" href="/blog/unlike?comment_id={{comment.key().id()}}&amp;permalink={{ not permalink }}">Unlike</a>
+          {% endif %}
+        {% endif %}
+      {% endif %}
+      #Likes: {{comment.liked_count}} Date: {{comment.created.strftime("%b %d, %Y")}}
+    </div>
+  </div>
+</div>
+
+
