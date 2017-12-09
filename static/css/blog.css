@@ -130,6 +130,8 @@ ul{
 .textarea{
 	min-height: 100%;
     width: 100%;
+    flex-wrap: wrap;
+    overflow-wrap: break-word;
 }
 
 .entry-box {
