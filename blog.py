@@ -210,8 +210,11 @@ class PostPage(BlogHandler):
         post = db.get(key)
         comments = Comment.all().filter(
             'post_id =', int(post_id)).order('created')
-        return self.render("permalink.html", post=post, comments=comments,
-                           username=self.user.name)
+        if self.user:
+            return self.render("permalink.html", post=post, comments=comments,
+                               username=self.user.name)
+        else:
+            return self.render("permalink.html", post=post, comments=comments)
 
 
 class NewPost(BlogHandler):
@@ -249,13 +252,12 @@ class EditPost(BlogHandler):
         if self.user:
             post_id = int(self.request.get('post_id'))
             post = Post.by_id(post_id)
-            if post is not None:
-                if post.blogger_id != self.user.key().id():
-                    return self.redirect("/blog")
-                return self.render("edit.html", post=post,
-                                   username=self.user.name)
-            else:
+            if not post:
+                return self.error(404)
+            if post.blogger_id != self.user.key().id():
                 return self.redirect("/blog")
+            return self.render("edit.html", post=post,
+                               username=self.user.name)
         else:
             return self.redirect("/login")
 
@@ -284,13 +286,12 @@ class DeletePost(BlogHandler):
         if self.user:
             post_id = int(self.request.get('post_id'))
             post = Post.by_id(post_id)
-            if post is not None:
-                if post.blogger_id != self.user.key().id():
-                    return self.redirect("/blog")
-                return self.render("delete.html", post=post,
-                                   username=self.user.name)
-            else:
+            if not post:
+                return self.error(404)
+            if post.blogger_id != self.user.key().id():
                 return self.redirect("/blog")
+            return self.render("delete.html", post=post,
+                               username=self.user.name)
         else:
             return self.redirect("/login")
 
@@ -326,13 +327,12 @@ class EditComment(BlogHandler):
         if self.user:
             comment_id = int(self.request.get('comment_id'))
             comment = Comment.by_id(comment_id)
-            if comment is not None:
-                if comment.blogger_id != self.user.key().id():
-                    return self.redirect("/blog")
-                return self.render("editcomment.html", comment=comment,
-                                   username=self.user.name)
-            else:
+            if not comment:
+                return self.error(404)
+            if comment.blogger_id != self.user.key().id():
                 return self.redirect("/blog")
+            return self.render("editcomment.html", comment=comment,
+                               username=self.user.name)
         else:
             return self.redirect("/login")
 
@@ -360,13 +360,12 @@ class DeleteComment(BlogHandler):
         if self.user:
             comment_id = int(self.request.get('comment_id'))
             comment = Comment.by_id(comment_id)
-            if comment is not None:
-                if comment.blogger_id != self.user.key().id():
-                    return self.redirect("/blog")
-                return self.render("deletecomment.html", comment=comment,
-                                   username=self.user.name)
-            else:
+            if not comment:
+                return self.error(404)
+            if comment.blogger_id != self.user.key().id():
                 return self.redirect("/blog")
+            return self.render("deletecomment.html", comment=comment,
+                               username=self.user.name)
         else:
             return self.redirect("/login")
 
@@ -415,12 +414,10 @@ class Unlike(BlogHandler):
                 item_id = int(self.request.get('comment_id'))
                 item = Comment.by_id(item_id)
                 post_id = item.post_id
-
             user_id = self.user.key().id()
             if user_id in item.liked:
                 item.liked.remove(user_id)
                 item.put()
-
             if self.request.get('permalink') == 'True':
                 return self.redirect('/blog/%s' % str(post_id))
             else:
